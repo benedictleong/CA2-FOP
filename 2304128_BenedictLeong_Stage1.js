@@ -37,6 +37,9 @@ do{
             console.log('Name \t\t: ' + movieList[x][0] + '\nGenre\t\t: ' + movieList[x][1] + '\nRunning Time\t: ' + movieList[x][2] + '\nRelease Date\t: ' + movieList[x][3] + '\nRating\t\t: ' + movieList[x][4][1] + ' (' + movieList[x][4][0] + ' voters)\n');
             x++;
         }
+        console.log('Hi ' + name + ', please select your choice:');
+        console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
+        reply = input.question('\t' + '>> ');
     } else if(reply > 1 && reply < 6) {
         console.log('Sorry, work in progress!');
         console.log();
