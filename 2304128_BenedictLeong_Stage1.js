@@ -8,43 +8,42 @@ var movie3 = ['Fast X','Crime, Action, Mystery,Thriller',43,'19 May 2023',[28, 6
 var movie4 = ['Ant-Man and the Wasp: Quantumania','Adventure, Action',120,'16 Feb 2023',[18,80]];
 var movie5 = ['M3GAN','Horror,Mystery,Thriller',102,'6 Jan 2023',[20,70]];
 var movieList = [movie1,movie2,movie3,movie4,movie5];
-
 console.log('Welcome to Silver Vintage Movie Review Program');
 var name = input.question('Please enter your name: ');
 console.log();
 console.log('Hi ' + name + ', please select your choice:');
-console.log('\t' + '1. Display All Movies');
-console.log('\t' + '2. Coming Soon');
-console.log('\t' + '3. Coming Soon');
-console.log('\t' + '4. Coming Soon');
-console.log('\t' + '5. Coming Soon');
-console.log('\t' + '6. Exit');
-var reply = input.question('\t' + '>> ');
+console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
+var reply = input.questionInt('\t' + '>> ');
 
+for (var g = 0; g < 5; g++) {
+    var hours = Math.floor(movieList[g][2]/60);
+    var minutes = movieList[g][2] % 60;
+    if(hours == 0){
+        movieList[g][2] = minutes + 'm';
+    }
+    else if(minutes == 0){
+        movieList[g][2] = hours + 'h';
+    }
+    else {
+        movieList[g][2] = hours + 'h ' + minutes + 'm';
+    } 
+}
 
+do{
+    if(reply == 1) {
+        
+    } else if(reply > 1 && reply < 6) {
+        console.log('Sorry, work in progress!');
+        console.log();
+        console.log('Hi ' + name + ', please select your choice:');
+        console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
+        reply = input.question('\t' + '>> ');
+    } else if(reply < 1 || reply > 6) {
+        console.log('Please enter a valid input.');
+        console.log();
+        console.log('Hi ' + name + ', please select your choice:');
+        console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
+        reply = input.question('\t' + '>> ');
+    }    
+} while(reply != 6)
 
-do {
-    //movie details
-} while(reply == 1) do {
-    console.log('Sorry, work in progress!');
-    console.log();
-    console.log('Hi ' + name + ', please select your choice:');
-    console.log('\t' + '1. Display All Movies');
-    console.log('\t' + '2. Coming Soon');
-    console.log('\t' + '3. Coming Soon');
-    console.log('\t' + '4. Coming Soon');
-    console.log('\t' + '5. Coming Soon');
-    console.log('\t' + '6. Exit');
-    reply = input.question('\t' + '>> ');
-} while(reply == 2 || reply == 3 || reply == 4 || reply == 5) do {
-    console.log('Please enter a valid input.');
-    console.log();
-    console.log('Hi ' + name + ', please select your choice:');
-    console.log('\t' + '1. Display All Movies');
-    console.log('\t' + '2. Coming Soon');
-    console.log('\t' + '3. Coming Soon');
-    console.log('\t' + '4. Coming Soon');
-    console.log('\t' + '5. Coming Soon');
-    console.log('\t' + '6. Exit');
-    reply = input.question('\t' + '>> ');
-} while(reply < 1 || reply > 6)
