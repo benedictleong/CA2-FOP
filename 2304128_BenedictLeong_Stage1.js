@@ -54,4 +54,5 @@ do{
         reply = input.question('\t' + '>> ');
     }    
 } while(reply != 6)
+console.log('Thank you & goodbye!');
 
