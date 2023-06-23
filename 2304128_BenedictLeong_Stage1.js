@@ -1,6 +1,14 @@
 //name  = Benedict Leong Jin Yew
 //class = DISM/1A/04
 //adm   = 2304128
+function checkInput(input) {
+    if(isNaN(input)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 var input = require('readline-sync');
 var movie1 = ['Black Panther:Wakanda Forever 2022','Adventure, Action,Drama, Fantasy, Sci-Fi,Thriller',161,'11 Nov 2022',[9,42]];
 var movie2 = ['Avatar: The Way of Water','Adventure, Sci-Fi',192,'16 Dec 2022',[4, 15]];
@@ -12,9 +20,6 @@ var movieList = [movie1,movie2,movie3,movie4,movie5];
 console.log('Welcome to Silver Vintage Movie Review Program');
 var name = input.question('Please enter your name: ');
 console.log();
-console.log('Hi ' + name + ', please select your choice:');
-console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
-var reply = input.questionInt('\t' + '>> ');
 
 for(var g = 0; g < 5; g++) {
     var hours = Math.floor(movieList[g][2]/60);
@@ -30,29 +35,25 @@ for(var g = 0; g < 5; g++) {
     }
     movieList[g][4][1] = Math.round((movieList[g][4][1] / movieList[g][4][0]) * 10) / 10
 }
-var x = 0;
 do{
+    console.log('Hi ' + name + ', please select your choice:');
+    console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
+    var reply = input.question('\t' + '>> ');
+    var isNumber = checkInput(reply);
     if(reply == 1) {
-        while(x < 5) {
+        var x = 0;
+        for (x = 0;x < 5;x++) {
             console.log('Name \t\t: ' + movieList[x][0] + '\nGenre\t\t: ' + movieList[x][1] + '\nRunning Time\t: ' + movieList[x][2] + '\nRelease Date\t: ' + movieList[x][3] + '\nRating\t\t: ' + movieList[x][4][1] + ' (' + movieList[x][4][0] + ' voters)\n');
-            x++;
-        }
-        console.log('Hi ' + name + ', please select your choice:');
-        console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
-        reply = input.question('\t' + '>> ');
+        };
     } else if(reply > 1 && reply < 6) {
         console.log('Sorry, work in progress!');
         console.log();
-        console.log('Hi ' + name + ', please select your choice:');
-        console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
-        reply = input.question('\t' + '>> ');
     } else if(reply < 1 || reply > 6) {
         console.log('Please enter a valid input.');
         console.log();
-        console.log('Hi ' + name + ', please select your choice:');
-        console.log('\t' + '1. Display All Movies\n\t2. Coming Soon\n\t3. Coming Soon\n\t4. Coming Soon\n\t5. Coming Soon\n\t6. Exit');
-        reply = input.question('\t' + '>> ');
-    }    
+    }  else if( isNumber == false) {
+        console.log('Please enter a valid input.');
+        console.log();
+    }
 } while(reply != 6)
 console.log('Thank you & goodbye!');
-
