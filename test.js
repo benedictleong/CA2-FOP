@@ -32,6 +32,13 @@ var movie2 = new Movie('Avatar: The Way of Water','Adventure, Sci-Fi',192,'16 De
 var movie3 = new Movie('Fast X','Crime, Action, Mystery,Thriller',43,'19 May 2023',[28, 60]);
 var movie4 = new Movie('Ant-Man and the Wasp: Quantumania','Adventure, Action',120,'16 Feb 2023',[18,80]);
 var movie5 = new Movie('M3GAN','Horror,Mystery,Thriller',102,'6 Jan 2023',[20,70]);
+var addedmovie = new Movie({
+    name: '',
+    genre: '',
+    runningTime: '',
+    releaseDate: '',
+    rating: ''
+});
 
 //question
 console.log('Welcome to Silver Vintage Movie Review Program');
@@ -46,12 +53,19 @@ do {
     if(reply == 2) {
         //add movie function
         var replyName = input.question('\n\t' + "Please enter Movie's name: ");
+        addedmovie.name = replyName;
+
         console.log("\n\tPlease enter Movie's genre(s):" + '\n\t1) Action' + '\n\t2) Adventure' + '\n\t3) Crime' + '\n\t4) Drama' + '\n\t5) Fantasy' + '\n\t6) Horror' + '\n\t7) Mystery' + '\n\t8) Sci-Fi' + '\n\t9) Thriller');
         var replyGenre = input.question('\t' + '>> ');
+        addedmovie.genre = replyGenre;
+
         var replyreleaseDate = input.question("\n\tPlease enter Movie's release date: ");
+        addedmovie.releaseDate = replyreleaseDate;
+
         var replyrunningTime = input.question("\n\tPlease enter Movie's running time (mins): ");
+        addedmovie.runningTime = replyrunningTime;
+
         console.log('\n\t***The movie ' + "'" + replyName + "'" + ' has been added successfully!***\n');
-        var addedmovie = new Movie(replyName, replyGenre, replyrunningTime, replyreleaseDate,[0,0]);
     } else if(reply == 1) {
         //display movie function
         console.log(movie1.displayMovieDetails() + '\n\n' + movie2.displayMovieDetails()+ '\n\n' + movie3.displayMovieDetails()+ '\n\n' + movie4.displayMovieDetails()+ '\n\n' + movie5.displayMovieDetails() + '\n\n' + addedmovie.displayMovieDetails() + '\n');

@@ -50,3 +50,11 @@ var movie5 = {
         this.rating[1] = Math.round((this.rating[1] / this.rating[0]) * 10) / 10;
         return hours, minutes;
     }
+
+var addedmovie = {
+    name: '',
+    genre: '',
+    runningTime: '',
+    releaseDate: '',
+    rating: ''
+}
