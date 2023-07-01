@@ -26,7 +26,7 @@ console.log('Welcome to Silver Vintage Movie Review Program');
 var name = input.question('Please enter your name: ');
 console.log();
 
-//change running tim from minutes to hours and minutes
+//change running time from minutes to hours and minutes
 for(var g = 0; g < 5; g++) {
     var hours = Math.floor(movieList[g][2]/60);
     var minutes = movieList[g][2] % 60;

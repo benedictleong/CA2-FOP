@@ -1,0 +1,52 @@
+//stored movie details
+var movie1 = {
+    name: 'Black Panther:Wakanda Forever 2022',
+    genre: 'Adventure, Action,Drama, Fantasy, Sci-Fi,Thriller',
+    time: 161,
+    date: '11 Nov 2022',
+    rating: [9,42]
+};
+var movie2 = {
+    name: 'Avatar: The Way of Water',
+    genre: 'Adventure, Sci-Fi',
+    time: 192,
+    date: '16 Dec 2022',
+    rating: [4, 15]
+};
+var movie3 = {
+    name: 'Fast X',
+    genre: 'Crime, Action, Mystery,Thriller',
+    time: 43,
+    date: '19 May 2023',
+    rating: [28, 60]
+};
+var movie4 = {
+    name: 'Ant-Man and the Wasp: Quantumania',
+    genre: 'Adventure, Action',
+    time: 120,
+    date: '16 Feb 2023',
+    rating: [18,80]
+};
+var movie5 = {
+    name: 'M3GAN',
+    genre: 'Horror,Mystery,Thriller',
+    time: 102,
+    date: '6 Jan 2023',
+    rating: [20,70]
+};
+
+    changeTime() {
+        var hours = Math.floor(this.runningTime/60);
+        var minutes = this.runningTime % 60;
+        if(hours == 0){
+            this.runningTime = minutes + 'm';
+        }
+        else if(minutes == 0){
+            this.runningTime = hours + 'h';
+        }
+        else {
+            this.runningTime = hours + 'h ' + minutes + 'm';
+        }
+        this.rating[1] = Math.round((this.rating[1] / this.rating[0]) * 10) / 10;
+        return hours, minutes;
+    }
