@@ -139,7 +139,7 @@ do {
     } else if(reply == 1) {
         //display movie option
         console.log(movie1.displayMovieDetails() + '\n\n' + movie2.displayMovieDetails()+ '\n\n' + movie3.displayMovieDetails()+ '\n\n' + movie4.displayMovieDetails()+ '\n\n' + movie5.displayMovieDetails() + '\n\n' + addedmovie.displayMovieDetails() + '\n');
-    } else if(reply == 3){
+    } else if(reply == 3) {
         //add rating option
         do {
             console.log('\n\tSelect the movie to add a rating:\n\t1) ' + movie1.name + '\n\t2) ' + movie2.name + '\n\t3) ' + movie3.name + '\n\t4) ' + movie4.name + '\n\t5) ' + movie5.name + '\n\t6) ' + addedmovie.name + '\n\t7) Go Back to Main Menu');
@@ -225,6 +225,9 @@ do {
                 console.log();
             }
         } while(replyRating != 7);
+    } else if(reply == 4) {
+        //latest movies option
+        console.log('\n\tThe latest 3 movies are:' + '\n\t1) ' + movie3.releaseDate + ' - ' + movie3.name + '\n\t2) ' + movie4.releaseDate + ' - ' + movie4.name + '\n\t3) ' + movie5.releaseDate + ' - ' + movie5.name + '\n');
     } else if(reply < 1 || reply > 6) {
         console.log('Please enter a valid input.');
         console.log();
