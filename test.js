@@ -66,7 +66,7 @@ var movie2 = new Movie('Avatar: The Way of Water','Adventure, Sci-Fi',192,'16 De
 var movie3 = new Movie('Fast X','Crime, Action, Mystery,Thriller',43,'19 May 2023',[28, 60]);
 var movie4 = new Movie('Ant-Man and the Wasp: Quantumania','Adventure, Action',120,'16 Feb 2023',[18,80]);
 var movie5 = new Movie('M3GAN','Horror,Mystery,Thriller',102,'6 Jan 2023',[20,70]);
-var addedmovie = new Movie('',[],'','','');
+var addedmovie = new Movie('',[],'','',[0,0]);
 var movieList = [movie1, movie2, movie3, movie4, movie5, addedmovie];
 
 //change running time from minutes to hours and minutes
@@ -168,14 +168,12 @@ do {
         var minutes = movieList[5].runningTime % 60;
         if(hours == 0){
             movieList[5].runningTime = minutes + 'm';
-        }
-        else if(minutes == 0){
-            movieList[5].runningTime = hours + 'h';
-        }
-        else {
+        } else if(minutes == 0){
+            movieList[5].runningTime = hours + 'h'; 
+        } else {
             movieList[5].runningTime = hours + 'h ' + minutes + 'm';
         }
-        movieList[5].rating[1] = Math.round((movieList[5].rating[1] / movieList[5].rating[0]) * 10) / 10
+
     } else if(reply == 1) {
         //display movie option
         console.log(movie1.displayMovieDetails() + '\n\n' + movie2.displayMovieDetails()+ '\n\n' + movie3.displayMovieDetails()+ '\n\n' + movie4.displayMovieDetails()+ '\n\n' + movie5.displayMovieDetails() + '\n\n' + addedmovie.displayMovieDetails() + '\n');
@@ -253,7 +251,8 @@ do {
                     if(ismovieratingNumber == false) {
                         console.log('\tEnter a valid rating!');
                     } else {
-                        addedmovie.rating = replymovieRating;
+                        addedmovie.rating[1] = replymovieRating;
+                        addedmovie.rating[0] = '1';
                         break;
                     }
                 } while(replyRating == 6);
@@ -278,31 +277,58 @@ do {
                 console.log();
             } else if(replyfilterGenre == 1) {
                 console.log('\n\tYou have selected "Action" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Fast X\n\t3) Ant-man and the Wasp: Quantumania\n');
+                var check1 = addedmovie.genre.includes('Action');
+                if(check1 == true) {
+                    console.log('\t4) ' + addedmovie.name);
+                }
             } else if(replyfilterGenre == 2) {
-                console.log('\n\tYou have selected "Adventure" genre:')
-                var check2_1 = movie1genre.includes('Adventure');
-                var check2_2 = movie2genre.includes('Adventure');
-                var check2_3 = movie3genre.includes('Adventure');
-                var check2_4 = movie4genre.includes('Adventure');
-                var check2_5 = movie5genre.includes('Adventure');
-                var check2_6 = addedmoviegenre.includes('Adventure');
-                if(check2_1 == true) {
-                    console.log('Black Panther: Wakanda Forever 2022');
+                console.log('\n\tYou have selected "Adventure" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Avatar: The Way of Water\n\t3) Ant-man and the Wasp: Quantumania\n');
+                var check2 = addedmovie.genre.includes('Adventure');
+                if(check2 == true) {
+                    console.log('\t4) ' + addedmovie.name);
                 }
             } else if(replyfilterGenre == 3) {
-                console.log('\n\tYou have selected "Crime" genre:')
+                console.log('\n\tYou have selected "Crime" genre:\n\t1) Fast X\n');
+                var check3 = addedmovie.genre.includes('Crime');
+                if(check3 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
             } else if(replyfilterGenre == 4) {
-                console.log('\n\tYou have selected "Drama" genre:')
+                console.log('\n\tYou have selected "Drama" genre:\n\t1) Black Panther: Wakanda Forever 2022\n');
+                var check4 = addedmovie.genre.includes('Drama');
+                if(check4 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
             } else if(replyfilterGenre == 5) {
-                console.log('\n\tYou have selected "Fantasy" genre:')
+                console.log('\n\tYou have selected "Fantasy" genre:\n\t1) Black Panther: Wakanda Forever 2022\n');
+                var check5 = addedmovie.genre.includes('Fantasy');
+                if(check5 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
             } else if(replyfilterGenre == 6) {
-                console.log('\n\tYou have selected "Horror" genre:')
+                console.log('\n\tYou have selected "Horror" genre:\n\t1) M3GAN\n');
+                var check6 = addedmovie.genre.includes('Horror');
+                if(check6 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
             } else if(replyfilterGenre == 7) {
-                console.log('\n\tYou have selected "Mystery" genre:')
+                console.log('\n\tYou have selected "Mystery" genre:\n\t1) Fast X\n\t2) M3GAN\n');
+                var check7 = addedmovie.genre.includes('Mystery');
+                if(check7 == true) {
+                    console.log('\t3) ' + addedmovie.name);
+                }
             } else if(replyfilterGenre == 8) {
-                console.log('\n\tYou have selected "Sci-Fi" genre:')
+                console.log('\n\tYou have selected "Sci-Fi" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Avatar: The Way of Water\n');
+                var check8 = addedmovie.genre.includes('Sci-Fi');
+                if(check8 == true) {
+                    console.log('\t3) ' + addedmovie.name);
+                }
             } else if(replyfilterGenre == 9) {
-                console.log('\n\tYou have selected "Thriller" genre:')
+                console.log('\n\tYou have selected "Thriller" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Fast X\n\t3) M3GAN\n');
+                var check9 = addedmovie.genre.includes('Thriller');
+                if(check9 == true) {
+                    console.log('\t4) ' + addedmovie.name);
+                }
             }
             break;
         } while(reply == 5);
