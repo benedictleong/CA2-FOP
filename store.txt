@@ -58,3 +58,35 @@ var addedmovie = {
     releaseDate: '',
     rating: ''
 }
+
+                        var replyGenreArr = []
+                        var stringConversion = replyGenre.toString();
+                        var stringConversion= stringConversion.split(',');
+                        replyGenreArr.push(parseInt(stringConversion))
+                        //store genres
+                        for(var i = 0; i < replyGenreArr.length; i++) {
+                            switch(replyGenreArr[i]) {
+                                case 1:
+                                    movieList[5].genre.push('Action');
+                                    break;
+                                case 2:
+                                    movieList[5].genre.push('Adventure');
+                                    break;
+                                case 3:
+                                    movieList[5].genre.push('Crime');
+                                case 4:
+                                    movieList[5].genre.push('Drama');
+                                case 5:
+                                    movieList[5].genre.push('Fantasy');
+                                case 6:
+                                    movieList[5].genre.push('Horror');
+                                case 7:
+                                    movieList[5].genre.push('Mystery');
+                                case 8:
+                                    movieList[5].genre.push('Sci-Fi');
+                                case 9:
+                                    movieList[5].genre.push('Thriller');
+                                default:
+                                    break;
+                            }
+                        }
