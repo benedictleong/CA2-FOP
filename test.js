@@ -36,12 +36,10 @@ var genre6 = 'Horror';
 var genre7 = 'Mystery';
 var genre8 = 'Sci-Fi';
 var genre9 = 'Thriller';
-var movie1genre = 'Adventure, Action,Drama, Fantasy, Sci-Fi,Thriller';
-var movie2genre = 'Adventure, Sci-Fi';
-var movie3genre = 'Crime, Action, Mystery,Thriller';
-var movie4genre = 'Adventure, Action';
-var movie5genre = 'Horror,Mystery,Thriller';
-var addedmoviegenre = this.genre;
+
+var d1 = new Date('2019-06-01');
+var d2 = new Date('2018-06-01');
+var d3 = new Date('2019-06-01');
 
 //movie display storage/class
 class Movie {

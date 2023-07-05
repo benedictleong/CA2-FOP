@@ -90,3 +90,10 @@ var addedmovie = {
                                     break;
                             }
                         }
+
+var movie1genre = 'Adventure, Action,Drama, Fantasy, Sci-Fi,Thriller';
+var movie2genre = 'Adventure, Sci-Fi';
+var movie3genre = 'Crime, Action, Mystery,Thriller';
+var movie4genre = 'Adventure, Action';
+var movie5genre = 'Horror,Mystery,Thriller';
+var addedmoviegenre = this.genre;
