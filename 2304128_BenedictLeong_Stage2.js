@@ -412,7 +412,7 @@ do {
         }
     } else if(reply == 8) {
         //login option
-        console.log('\nPlease enter yout username & password,');
+        console.log('\nPlease enter your username & password,');
         do {
             do {
                 var username = input.question('\n\t Username: ');
