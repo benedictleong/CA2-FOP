@@ -382,13 +382,26 @@ do {
         } else {
             var creditsTotal = '50';
             console.log('\nHi ' + name + ', you have \x1b[33m' + creditsTotal + '\x1b[37m credits,');
-            console.log()
+            console.log();
+            //buy credits option
+            var replycreditsPurchase = input.question('Buy credits?[yes/no/exit]: ');
+            if(replycreditsPurchase == 'yes') {
+                //credits purchase choice
+                do {
+                    console.log('\t1) 20 credits + 5 free credits...............$20\n\t2) 40 credits + 10 free credits..............$40\n\t3) 80 credits + 20 free credits..............$80\n\t4) 160 credits + 40 free credits............$160\n\t5) Go back to main menu');
+                    var replypurchaseChoie = input.question('\n\tChoose the package you want to purchase: ');
+                } while(replycreditsPurchase == 'yes');
+            } else if(replycreditsPurchase == 'no') {
+                //
+            } else if(replycreditsPurchase == 'exit') {
+                //exit
+                console.log();
+            }
         }
     } else if(reply == 8) {
         //login option
         console.log('\nPlease enter yout username & password,');
         do {
-            var input = require('readline-sync');
             do {
                 var username = input.question('\n\t Username: ');
                 while(username == '') {
