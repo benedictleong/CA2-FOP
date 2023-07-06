@@ -389,7 +389,19 @@ do {
                 //credits purchase choice
                 do {
                     console.log('\t1) 20 credits + 5 free credits...............$20\n\t2) 40 credits + 10 free credits..............$40\n\t3) 80 credits + 20 free credits..............$80\n\t4) 160 credits + 40 free credits............$160\n\t5) Go back to main menu');
-                    var replypurchaseChoie = input.question('\n\tChoose the package you want to purchase: ');
+                    var replypurchaseChoice = input.question('\n\tChoose the package you want to purchase: ');
+                    if(replypurchaseChoice == 1) {
+                        //
+                    } else if(replypurchaseChoice == 2) {
+                        //
+                    } else if(replypurchaseChoice == 3) {
+                        //
+                    } else if(replypurchaseChoice == 4) {
+                        //
+                    } else if(replypurchaseChoice == 5) {
+                        console.log();
+                        break;
+                    }
                 } while(replycreditsPurchase == 'yes');
             } else if(replycreditsPurchase == 'no') {
                 //
