@@ -381,7 +381,7 @@ do {
             console.log('\n\x1b[33m***Please login to use this feature!!***\x1b[37m\n');
         } else {
             var creditsTotal = '50';
-            console.log('\nHi ' + name + ', you have ' + creditsTotal + ' credits,');
+            console.log('\nHi ' + name + ', you have \x1b[33m' + creditsTotal + '\x1b[37m credits,');
             console.log()
         }
     } else if(reply == 8) {
