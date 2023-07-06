@@ -380,32 +380,86 @@ do {
         if(username != 'admin') {
             console.log('\n\x1b[33m***Please login to use this feature!!***\x1b[37m\n');
         } else {
-            var creditsTotal = '50';
+            var creditsTotal = 50;
             console.log('\nHi ' + name + ', you have \x1b[33m' + creditsTotal + '\x1b[37m credits,');
             console.log();
             //buy credits option
-            var replycreditsPurchase = input.question('Buy credits?[yes/no/exit]: ');
+            var replycreditsPurchase = input.question('Buy credits?[yes/no]: ');
             if(replycreditsPurchase == 'yes') {
                 //credits purchase choice
                 do {
                     console.log('\t1) 20 credits + 5 free credits...............$20\n\t2) 40 credits + 10 free credits..............$40\n\t3) 80 credits + 20 free credits..............$80\n\t4) 160 credits + 40 free credits............$160\n\t5) Go back to main menu');
                     var replypurchaseChoice = input.question('\n\tChoose the package you want to purchase: ');
                     if(replypurchaseChoice == 1) {
-                        //
+                        //add 25 credits
+                        do {
+                            var confirmPurchase1 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
+                            if(confirmPurchase1 == 'CONFIRM') {
+                                creditsTotal += 25;
+                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits.***\x1b[37m\n');
+                                break;
+                            } else if(confirmPurchase1 == 'EXIT') {
+                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                console.log();
+                                break;
+                            } else {
+                                console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
+                            }
+                        } while(replypurchaseChoice == 1);
                     } else if(replypurchaseChoice == 2) {
-                        //
+                        //add 50 credits
+                        do {
+                            var confirmPurchase2 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
+                            if(confirmPurchase2 == 'CONFIRM') {
+                                creditsTotal += 50;
+                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits.***\x1b[37m\n');
+                                break;
+                            } else if(confirmPurchase2 == 'EXIT') {
+                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                console.log();
+                                break;
+                            } else {
+                                console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
+                            }
+                        } while(replypurchaseChoice == 2);
                     } else if(replypurchaseChoice == 3) {
-                        //
+                        //add 100 credits
+                        do {
+                            var confirmPurchase3 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
+                            if(confirmPurchase3 == 'CONFIRM') {
+                                creditsTotal += 100;
+                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits.***\x1b[37m\n');
+                                break;
+                            } else if(confirmPurchase3 == 'EXIT') {
+                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                console.log();
+                                break;
+                            } else {
+                                console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
+                            }
+                        } while(replypurchaseChoice == 3);
                     } else if(replypurchaseChoice == 4) {
-                        //
+                        //add 200 credits
+                        do {
+                            var confirmPurchase4 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
+                            if(confirmPurchase4 == 'CONFIRM') {
+                                creditsTotal += 200;
+                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits.***\x1b[37m\n');
+                                break;
+                            } else if(confirmPurchase4 == 'EXIT') {
+                                console.log('\x1b[31m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                console.log();
+                                break;
+                            } else {
+                                console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
+                            }
+                        } while(replypurchaseChoice == 4);
                     } else if(replypurchaseChoice == 5) {
                         console.log();
                         break;
                     }
                 } while(replycreditsPurchase == 'yes');
             } else if(replycreditsPurchase == 'no') {
-                //
-            } else if(replycreditsPurchase == 'exit') {
                 //exit
                 console.log();
             }
@@ -429,7 +483,7 @@ do {
                 }
             } while(password == '');
             if(username != "admin" || password != "password") {
-                console.log("\x1b[31m******Invalid username or password!******\x1b[37m");
+                console.log("\x1b[31m******Invalid username or password!******\x1b[37m\n");
             } else {
                 console.log('\x1b[32m******Login successful...******\x1b[37m\n');
                 var name = '\x1b[36m' + username + '\x1b[37m'; 
