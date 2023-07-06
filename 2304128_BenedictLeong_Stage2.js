@@ -110,7 +110,7 @@ console.log();
 
 do {
     console.log('Hi ' + name + ', please select your choice:');
-    console.log('\t' + '1. Display All Movies\n\t2. Add Movie\n\t3. Add Rating\n\t4. Latest 3 Release Date\n\t5. Filter by Genre\n\t6. Buy Movie\n\t7. Login\n\t8. Exit');
+    console.log('\t' + '1. Display All Movies\n\t2. Add Movie\n\t3. Add Rating\n\t4. Latest 3 Release Date\n\t5. Filter by Genre\n\t6. Buy Movie\n\t7. View In-APP Credits\n\t8. Login\n\t9. Exit');
     var reply = input.question('\t' + '>> ');
     //check for valid input
     var isNumber = checkInput(reply);
@@ -376,39 +376,46 @@ do {
     } else if(reply == 6) {
         //buy movie option
     } else if(reply == 7) {
+        //check credits option
+        if(username != 'admin') {
+            console.log('\n\x1b[33m***Please login to use this feature!!***\x1b[37m\n');
+        } else {
+            var creditsTotal = '50';
+            console.log('\nHi ' + name + ', you have ' + creditsTotal + ' credits,');
+            console.log()
+        }
+    } else if(reply == 8) {
         //login option
         console.log('\nPlease enter yout username & password,');
         do {
+            var input = require('readline-sync');
             do {
                 var username = input.question('\n\t Username: ');
-                if(username == '') {
+                while(username == '') {
                     console.log('\x1b[33m******Please enter your username!!******\x1b[37m');
-                } else {
                     break;
                 }
-            } while(reply == 7);
+            } while(username == '');
             do {
                 var password = input.question('\n\t Password: ');
-                if(password == '') {
+                while(password == '') {
                     console.log('\x1b[33m******Please enter your password!!******\x1b[37m');
-                } else {
                     break;
                 }
-            } while(reply == 7);
+            } while(password == '');
             if(username != "admin" || password != "password") {
                 console.log("\x1b[31m******Invalid username or password!******\x1b[37m");
             } else {
                 console.log('\x1b[32m******Login successful...******\x1b[37m\n');
                 var name = '\x1b[36m' + username + '\x1b[37m'; 
-                break;
             }
         } while(reply == 7);
-    } else if(reply < 1 || reply > 8) {
+    } else if(reply < 1 || reply > 9) {
         console.log('Please enter a valid input.');
         console.log();
-    }  else if( isNumber == false) {
+    } else if( isNumber == false) {
         console.log('Please enter a valid input.');
         console.log();
     }
-} while(reply != 8);
+} while(reply != 9);
 console.log('Thank you & goodbye!');
