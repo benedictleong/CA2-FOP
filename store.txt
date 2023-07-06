@@ -97,3 +97,16 @@ var movie3genre = 'Crime, Action, Mystery,Thriller';
 var movie4genre = 'Adventure, Action';
 var movie5genre = 'Horror,Mystery,Thriller';
 var addedmoviegenre = this.genre;
+
+        do {
+            var error = false;
+            console.log('\n\tSelect the movie to add a rating:');
+            for(var q = 0; q < movieList.length; q++) {
+                console.log('\t' + q + 1 + ') ' + movieList[q].name);
+            }
+            var movieChoice = input.questionInt(movieList.length + 1 + ') Go back to main menu\n\t>> ');
+            if(movieChoice > movieList.length + 1 || movieChoice < 1) {
+                error = true;
+                console.log('Kindly enter a valid input!');
+            }
+        } while(error == true);
