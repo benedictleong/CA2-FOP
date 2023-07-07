@@ -382,8 +382,8 @@ do {
             console.log('\n\x1b[33m***Please login to use this feature!!***\x1b[37m\n');
         } else {
             do {
-                console.log('\nList of movies for rent:\n\t1. ' + movieList[0].name + '........20 credits\n\t2. ' + movieList[1].name + '..................15 credits\n\t3. ' + movieList[2].name + '....................................10 credits\n\t4. ' + movieList[3].name + '.........20 credits\n\t5. ' + movieList[4].name + '.....................................10 credits');
-                var replyRental = input.question('\n\tChoose the movie you want to rent [type "exit" to leave]: ')
+                console.log('\nList of movies for rent:\n\t1. ' + movieList[0].name + '........20 credits\n\t2. ' + movieList[1].name + '..................15 credits\n\t3. ' + movieList[2].name + '....................................10 credits\n\t4. ' + movieList[3].name + '.........20 credits\n\t5. ' + movieList[4].name + '.....................................10 credits\n\t6. Return to Main Menu');
+                var replyRental = input.question('\n\tChoose the movie you want to rent: ')
                 var isreplyRental = checkInput(replyRental);
                 if(isreplyRental == true) {
                     if(replyRental == '1') {
@@ -446,7 +446,7 @@ do {
                                 console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
                             }
                         } while(replyRental == '4');
-                    } else if(replyRating == '5') {
+                    } else if(replyRental == '5') {
                         do {
                             var confirmRental5 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
                             if(confirmRental5 == 'CONFIRM') {
@@ -461,13 +461,13 @@ do {
                                 console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
                             }
                         } while(replyRental == '5');
+                    } else if(replyRental == '6') {
+                        //exit
+                        console.log();
+                        break;
                     }
                 } else if(isreplyRental == false){
                     console.log('\x1b[33m******Please enter a valid input!!******\x1b[37m\n');
-                } else if(replyRental == 'exit') {
-                    //exit
-                    console.log();
-                    break;
                 }
             } while(username == 'admin');
         }
