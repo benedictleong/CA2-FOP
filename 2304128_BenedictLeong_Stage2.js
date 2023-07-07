@@ -23,16 +23,16 @@ customSort = (a, b) => {
 }
 
 //input checker: movie name
-function checkName() {
-    if(input == 'Black Panther:Wakanda Forever 2022') {
+function checkName(input) {
+    if(input == 'black panther:wakanda forever 2022') {
         return true;
-    } else if(input == 'Avatar: The Way of Water') {
+    } else if(input == 'avatar: the way of water') {
         return true;
-    } else if(input == 'Fast X') {
+    } else if(input == 'fast x') {
         return true;
-    } else if(input == 'Ant-Man and the Wasp: Quantumania') {
+    } else if(input == 'ant-man and the wasp: quantumania') {
         return true;
-    } else if(input == 'M3GAN') {
+    } else if(input == 'm3gan') {
         return true;
     } else {
         return false;
@@ -122,7 +122,8 @@ do {
         do {
             var replyName = input.question('\n\t' + "Please enter Movie's name: ");
             //check if name is already used
-            var isvalidName = checkName(replyName);
+            var lowerreplyName = replyName.toLowerCase();
+            var isvalidName = checkName(lowerreplyName);
             if(isvalidName == true) {
                 console.log('\tPlease enter a unique movie name!');
             } else {
