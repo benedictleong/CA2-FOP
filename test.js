@@ -82,11 +82,9 @@ var movie3 = new Movie('Fast X','Crime, Action, Mystery, Thriller',43,'19 May 20
 var movie4 = new Movie('Ant-Man and the Wasp: Quantumania','Adventure, Action',120,'16 Feb 2023',[18,80]);
 var movie5 = new Movie('M3GAN','Horror, Mystery, Thriller',102,'6 Jan 2023',[20,70]);
 var movieList = [movie1, movie2, movie3, movie4, movie5];
+var correctedRating = [];
+var correctedVoter = [];
 
-//calculate rating
-for(var g = 0; g < movieList.length; g++) {
-    movieList[g].rating[1] = Math.round((movieList[g].rating[1] / movieList[g].rating[0]) * 10) / 10;
-}
 
 //question------------------------------------------------------------------------------------------------->
 console.log('Welcome to Silver Vintage Movie Review Program');
@@ -218,6 +216,7 @@ do {
                 break;
             }
         } while(reply == 2);
+    } else if(reply == 1) {
         //change running time from minutes to hours and minutes
         for(var g = 0; g < movieList.length; g++) {
             var hours = Math.floor(movieList[g].runningTime/60);
@@ -231,8 +230,16 @@ do {
             else {
                 movieList[g].runningTime = hours + 'h ' + minutes + 'm';
             }
+            if(movieList[g].Rating[1] != 0){
+                correctedRating[g] = (Math.round(movieList[g].Rating[1] / movieList[g].Rating[0] * 10) / 10);
+                correctedVoter[g] = (movieList[g].Rating[0]);
+            }else{
+                correctedRating[g] = 0;
+                correctedVoter[g] = 0;
+            }
+            console.log('Name\t\t: '+movieList[x].Name+'\nGenre\t\t: '+movieList[x].Genre+'\nRunning Time\t: '+Corrected_Durations[x]+'\nRelease Date\t: '+movieList[x].ReleaseDate+'\nRating\t\t: '+Corrected_Ratings[x]+' ('+Corrected_Voters[x]+' voters)\n');
+            x++;
         }
-    } else if(reply == 1) {
         //display movie option
         for(var z = 0; z < movieList.length; z++) {
             console.log(movieList[z].displayMovieDetails() + '\n\n');
@@ -243,8 +250,9 @@ do {
             console.log('\n\tSelect the movie to add a rating:');
             for(var h = 0; h < movieList.length; h++) {
                 var v = h + 1;
-                console.log('\n\t' + v + ') ' + movieList[h].name);
+                console.log('\t' + v + ') ' + movieList[h].name);
             }
+            console.log('\t' + (movieList.length + 1) + ') Go Back to Main Menu');
             var replyRating = input.question('\t>> ');
             //check for valid input
             var isratingNumber = checkInput(replyRating);
@@ -255,10 +263,6 @@ do {
                 var ismovieratingNumber = checkInput(replymovieRating);
                 if(ismovieratingNumber == false) {
                     console.log('\tEnter a valid rating!');
-                } else {
-                    addedmovie.rating[1] = replymovieRating;
-                    addedmovie.rating[0] = '1';
-                    break;
                 }
             }
             if(replyRating == 1) {
@@ -270,7 +274,8 @@ do {
                     if(ismovieratingNumber == false) {
                         console.log('\tEnter a valid rating!');
                     } else {
-                        movie1.rating = replymovieRating;
+                        movie1.rating[1] += parseInt(replymovieRating);
+                        movie1.rating[0] += 1;
                         break;
                     }
                 } while(replyRating == 1);
@@ -283,7 +288,10 @@ do {
                     if(ismovieratingNumber == false) {
                         console.log('\tEnter a valid rating!');
                     } else {
-                        movie2.rating = replymovieRating;
+                        movie1.rating[1] += parseInt(replymovieRating);
+                        movie1.rating[0] += 1;
+                        //calculate rating
+                        movieList[1].rating[1] = Math.round((movieList[1].rating[1] / movieList[1].rating[0]) * 10) / 10;
                         break;
                     }
                 } while(replyRating == 2);
@@ -371,14 +379,14 @@ do {
                         break;
                     }
                 } while(replyRating == 6);
-            } else if(reply < 1 || reply > 7) {
+            } else if(replyRating < 1 || replyRating > (movieList.length + 1)) {
                 console.log('\n\tKindly enter a valid input!');
                 console.log();
             } else if( isratingNumber == false) {
                 console.log('\n\tKindly enter a valid input!');
                 console.log();
             }
-        } while(replyRating != 7);
+        } while(replyRating == (movieList.length + 1));
     } else if(reply == 4) {
         //latest movies option
         //sort according to date
@@ -394,69 +402,29 @@ do {
         do {
             //sort to alphabetical order
             var sortgenre = genres.sort();
-            console.log('\n\tPlease select a genre:\n\t1) ' + sortgenre[0] + '\n\t2) ' + sortgenre[1] + '\n\t3) ' + sortgenre[2] + '\n\t4) ' + sortgenre[3] + '\n\t5) ' + sortgenre[4] + '\n\t6) ' + sortgenre[5] + '\n\t7) ' + sortgenre[6] + '\n\t8) ' + sortgenre[7] + '\n\t9) ' + sortgenre[8]);
-            var replyfilterGenre = input.question("\n\t>> ");
+            console.log('\n\tPlease select a genre:\n\t1) ' + sortgenre[0] + '\n\t2) ' + sortgenre[1] + '\n\t3) ' + sortgenre[2] + '\n\t4) ' + sortgenre[3] + '\n\t5) ' + sortgenre[4] + '\n\t6) ' + sortgenre[5] + '\n\t7) ' + sortgenre[6] + '\n\t8) ' + sortgenre[7] + '\n\t9) ' + sortgenre[8] + '\n\t10) exit');
+            var replyfilterGenre = input.question("\t>> ");
+            var p = 0;
             //check for valid input
             var isreplyfilterGenre = checkInput(replyfilterGenre);
             if(isreplyfilterGenre == false) {
                 console.log('\tPlease enter a valid genre input!');
                 console.log();
-            } else if(replyfilterGenre == 1) {
-                console.log('\n\tYou have selected "Action" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Fast X\n\t3) Ant-man and the Wasp: Quantumania\n');
-                var check1 = addedmovie.genre.includes('Action');
-                if(check1 == true) {
-                    console.log('\t4) ' + addedmovie.name);
+            } else if(isreplyfilterGenre == true) {
+                //print out movies
+                var t = replyfilterGenre - 1;
+                console.log('\n\tYou have selected "' + genres[t] + '" genre:')
+                for(var m = 0; m < movieList.length; m++) {
+                    var check = movieList[m].genre.includes(genres[t]);
+                    if(check == true) {
+                        p += 1;
+                        console.log('\t' + p + ') ' + movieList[m].name);
+                    }
                 }
-            } else if(replyfilterGenre == 2) {
-                console.log('\n\tYou have selected "Adventure" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Avatar: The Way of Water\n\t3) Ant-man and the Wasp: Quantumania\n');
-                var check2 = addedmovie.genre.includes('Adventure');
-                if(check2 == true) {
-                    console.log('\t4) ' + addedmovie.name);
-                }
-            } else if(replyfilterGenre == 3) {
-                console.log('\n\tYou have selected "Crime" genre:\n\t1) Fast X\n');
-                var check3 = addedmovie.genre.includes('Crime');
-                if(check3 == true) {
-                    console.log('\t2) ' + addedmovie.name);
-                }
-            } else if(replyfilterGenre == 4) {
-                console.log('\n\tYou have selected "Drama" genre:\n\t1) Black Panther: Wakanda Forever 2022\n');
-                var check4 = addedmovie.genre.includes('Drama');
-                if(check4 == true) {
-                    console.log('\t2) ' + addedmovie.name);
-                }
-            } else if(replyfilterGenre == 5) {
-                console.log('\n\tYou have selected "Fantasy" genre:\n\t1) Black Panther: Wakanda Forever 2022\n');
-                var check5 = addedmovie.genre.includes('Fantasy');
-                if(check5 == true) {
-                    console.log('\t2) ' + addedmovie.name);
-                }
-            } else if(replyfilterGenre == 6) {
-                console.log('\n\tYou have selected "Horror" genre:\n\t1) M3GAN\n');
-                var check6 = addedmovie.genre.includes('Horror');
-                if(check6 == true) {
-                    console.log('\t2) ' + addedmovie.name);
-                }
-            } else if(replyfilterGenre == 7) {
-                console.log('\n\tYou have selected "Mystery" genre:\n\t1) Fast X\n\t2) M3GAN\n');
-                var check7 = addedmovie.genre.includes('Mystery');
-                if(check7 == true) {
-                    console.log('\t3) ' + addedmovie.name);
-                }
-            } else if(replyfilterGenre == 8) {
-                console.log('\n\tYou have selected "Sci-Fi" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Avatar: The Way of Water\n');
-                var check8 = addedmovie.genre.includes('Sci-Fi');
-                if(check8 == true) {
-                    console.log('\t3) ' + addedmovie.name);
-                }
-            } else if(replyfilterGenre == 9) {
-                console.log('\n\tYou have selected "Thriller" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Fast X\n\t3) M3GAN\n');
-                var check9 = addedmovie.genre.includes('Thriller');
-                if(check9 == true) {
-                    console.log('\t4) ' + addedmovie.name);
-                }
+            } else if(replyfilterGenre == '10') {
+                //exit
+                break;
             }
-            break;
         } while(reply == 5);
     } else if(reply == 6) {
         //rent movie option
