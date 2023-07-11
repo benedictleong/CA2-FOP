@@ -56,7 +56,13 @@ var genres = [genre1,genre2,genre3,genre4,genre5,genre6,genre7,genre8,genre9];
 var creditsTotal = 50;
 
 //movie release dates
-var dates = [];
+var dates = [
+    {date: '11 Nov 2022', name: 'Black Panther:Wakanda Forever 2022'},
+    {date: '16 Dec 2022', name: 'Avatar: The Way of Water'},
+    {date: '19 May 2023', name: 'Fast X'},
+    {date: '16 Feb 2023', name: 'Ant-Man and the Wasp: Quantumania'},
+    {date: '6 Jan 2023', name: 'M3GAN'}
+]
 
 //movie display storage/class
 class Movie {
@@ -76,15 +82,29 @@ class Movie {
         return s;
     }
 }
-var movie1 = new Movie('Black Panther:Wakanda Forever 2022','Adventure, Action, Drama, Fantasy, Sci-Fi,Thriller',161,'11 Nov 2022',[9,42]);
+var movie1 = new Movie('Black Panther:Wakanda Forever 2022','Adventure, Action,Drama, Fantasy, Sci-Fi,Thriller',161,'11 Nov 2022',[9,42]);
 var movie2 = new Movie('Avatar: The Way of Water','Adventure, Sci-Fi',192,'16 Dec 2022',[4, 15]);
-var movie3 = new Movie('Fast X','Crime, Action, Mystery, Thriller',43,'19 May 2023',[28, 60]);
+var movie3 = new Movie('Fast X','Crime, Action, Mystery,Thriller',43,'19 May 2023',[28, 60]);
 var movie4 = new Movie('Ant-Man and the Wasp: Quantumania','Adventure, Action',120,'16 Feb 2023',[18,80]);
-var movie5 = new Movie('M3GAN','Horror, Mystery, Thriller',102,'6 Jan 2023',[20,70]);
-var movieList = [movie1, movie2, movie3, movie4, movie5];
-var correctedRating = [];
-var correctedVoter = [];
+var movie5 = new Movie('M3GAN','Horror,Mystery,Thriller',102,'6 Jan 2023',[20,70]);
+var addedmovie = new Movie('-',['-'],'','-',[0,0]);
+var movieList = [movie1, movie2, movie3, movie4, movie5, addedmovie];
 
+//change running time from minutes to hours and minutes
+for(var g = 0; g < movieList.length; g++) {
+    var hours = Math.floor(movieList[g].runningTime/60);
+    var minutes = movieList[g].runningTime % 60;
+    if(hours == 0){
+        movieList[g].runningTime = minutes + 'm';
+    }
+    else if(minutes == 0){
+        movieList[g].runningTime = hours + 'h';
+    }
+    else {
+        movieList[g].runningTime = hours + 'h ' + minutes + 'm';
+    }
+    movieList[g].rating[1] = Math.round((movieList[g].rating[1] / movieList[g].rating[0]) * 10) / 10
+}
 
 //question------------------------------------------------------------------------------------------------->
 console.log('Welcome to Silver Vintage Movie Review Program');
@@ -106,87 +126,43 @@ do {
             var isvalidName = checkName(lowerreplyName);
             if(isvalidName == true) {
                 console.log('\tPlease enter a unique movie name!');
-            } else if(isvalidName == false) {
+            } else {
+                addedmovie.name = replyName;
                 do{
+                    addedmovie.genre.pop(0);
                     var replyGenre = input.question("\n\tPlease enter Movie's Genre(s):\n\t1) " + genre1 + '\n\t2) ' + genre2 + '\n\t3) ' + genre3 + '\n\t4) ' + genre4 + '\n\t5) ' + genre5 + '\n\t6) ' + genre6 + '\n\t7) ' + genre7 + '\n\t8) ' + genre8 + '\n\t9) ' + genre9 + '\n\t>> ');
                     replyGenre = replyGenre.split(",");
-                    var replyGenre2 = '';
-                    for (var x = 0; x < replyGenre.length; x++){
+                    for (var x = 0;x < replyGenre.length;x++){
                         replyGenre[x] = parseInt(replyGenre[x]);
                         var error = false;
                         switch(replyGenre[x]){
                             case 1: 
-                                replyGenre2 += 'Action';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Action');
+                                break;
                             case 2: 
-                                replyGenre2 += 'Adventure';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Adventure');
+                                break;
                             case 3: 
-                                replyGenre2 += 'Crime';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Crime');
+                                break; 
                             case 4: 
-                                replyGenre2 += 'Drama';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Drama');
+                                break;
                             case 5: 
-                                replyGenre2 += 'Fantasy';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Fantasy');
+                                break;
                             case 6: 
-                                replyGenre2 += 'Horror';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Horror');
+                                break;
                             case 7: 
-                                replyGenre2 += 'Mystery';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Mystery');
+                                break;
                             case 8: 
-                                replyGenre2 += 'Sci-Fi';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Sci-Fi');
+                                break;
                             case 9: 
-                                replyGenre2 += 'Thriller';
-                                if(x < (replyGenre.length - 1)) {
-                                    replyGenre2 += ', ';
-                                    break;
-                                } else {
-                                    break;
-                                }
+                                movieList[5].genre.push('Thriller');
+                                break;
                             default: 
                                 error = true;
                                 console.log("Please enter valid genre option(s)!");
@@ -195,76 +171,46 @@ do {
                     };
                 }while(error == true);
                 //store release date
-                var replyreleaseDate = input.question("\n\tPlease enter Movie's release date (e.g. 25 Feb 2010): ");
+                var replyreleaseDate = input.question("\n\tPlease enter Movie's release date: ");
+                addedmovie.releaseDate = replyreleaseDate;
                 do {
                     //store running time
                     var replyrunningTime = input.question("\n\tPlease enter Movie's running time (mins): ");
+                    addedmovie.runningTime = replyrunningTime;
                     //check for valid input
                     var istimeNumber = checkInput(replyrunningTime);
                     if(istimeNumber == false) {
                         console.log('\tPlease enter valid running time!');
                     } else {
-                        for(var d = 0; d < movieList.length; d++) {
-                            dates.push({date: movieList[d].releaseDate, name: movieList[d].name});
-                        }
+                        dates.push({date: addedmovie.releaseDate, name: addedmovie.name});
                         console.log('\n\t***The movie ' + "'" + replyName + "'" + ' has been added successfully!***\n');
-                        //add in values
-                        movieList.push(new Movie(replyName,replyGenre2,replyreleaseDate,replyrunningTime));
                         break;
                     }
                 } while(reply == 2);
                 break;
             }
         } while(reply == 2);
+        //change running time from minutes to hours and minutes(added movie)
+        var hours = Math.floor(movieList[5].runningTime/60);
+        var minutes = movieList[5].runningTime % 60;
+        if(hours == 0){
+            movieList[5].runningTime = minutes + 'm';
+        } else if(minutes == 0){
+            movieList[5].runningTime = hours + 'h'; 
+        } else {
+            movieList[5].runningTime = hours + 'h ' + minutes + 'm';
+        }
+
     } else if(reply == 1) {
-        //change running time from minutes to hours and minutes
-        for(var g = 0; g < movieList.length; g++) {
-            var hours = Math.floor(movieList[g].runningTime/60);
-            var minutes = movieList[g].runningTime % 60;
-            if(hours == 0){
-                movieList[g].runningTime = minutes + 'm';
-            }
-            else if(minutes == 0){
-                movieList[g].runningTime = hours + 'h';
-            }
-            else {
-                movieList[g].runningTime = hours + 'h ' + minutes + 'm';
-            }
-            if(movieList[g].Rating[1] != 0){
-                correctedRating[g] = (Math.round(movieList[g].Rating[1] / movieList[g].Rating[0] * 10) / 10);
-                correctedVoter[g] = (movieList[g].Rating[0]);
-            }else{
-                correctedRating[g] = 0;
-                correctedVoter[g] = 0;
-            }
-            console.log('Name\t\t: '+movieList[x].Name+'\nGenre\t\t: '+movieList[x].Genre+'\nRunning Time\t: '+Corrected_Durations[x]+'\nRelease Date\t: '+movieList[x].ReleaseDate+'\nRating\t\t: '+Corrected_Ratings[x]+' ('+Corrected_Voters[x]+' voters)\n');
-            x++;
-        }
         //display movie option
-        for(var z = 0; z < movieList.length; z++) {
-            console.log(movieList[z].displayMovieDetails() + '\n\n');
-        }
+        console.log(movie1.displayMovieDetails() + '\n\n' + movie2.displayMovieDetails()+ '\n\n' + movie3.displayMovieDetails()+ '\n\n' + movie4.displayMovieDetails()+ '\n\n' + movie5.displayMovieDetails() + '\n\n' + addedmovie.displayMovieDetails() + '\n');
     } else if(reply == 3) {
         //add rating option
         do {
-            console.log('\n\tSelect the movie to add a rating:');
-            for(var h = 0; h < movieList.length; h++) {
-                var v = h + 1;
-                console.log('\t' + v + ') ' + movieList[h].name);
-            }
-            console.log('\t' + (movieList.length + 1) + ') Go Back to Main Menu');
+            console.log('\n\tSelect the movie to add a rating:\n\t1) ' + movie1.name + '\n\t2) ' + movie2.name + '\n\t3) ' + movie3.name + '\n\t4) ' + movie4.name + '\n\t5) ' + movie5.name + '\n\t6) ' + addedmovie.name + '\n\t7) Go Back to Main Menu');
             var replyRating = input.question('\t>> ');
             //check for valid input
             var isratingNumber = checkInput(replyRating);
-            for(var j = 5; j < movieList.length; j++) {
-                var replymovieRating = input.question('\n\tEnter your rating for "' + movieList[j].name + '" (1 to 5 inclusive): ');
-                console.log();
-                //check for valid input
-                var ismovieratingNumber = checkInput(replymovieRating);
-                if(ismovieratingNumber == false) {
-                    console.log('\tEnter a valid rating!');
-                }
-            }
             if(replyRating == 1) {
                 do {
                     var replymovieRating = input.question('\n\tEnter your rating for "' + movie1.name + '" (1 to 5 inclusive): ');
@@ -274,8 +220,7 @@ do {
                     if(ismovieratingNumber == false) {
                         console.log('\tEnter a valid rating!');
                     } else {
-                        movie1.rating[1] += parseInt(replymovieRating);
-                        movie1.rating[0] += 1;
+                        movie1.rating = replymovieRating;
                         break;
                     }
                 } while(replyRating == 1);
@@ -288,10 +233,7 @@ do {
                     if(ismovieratingNumber == false) {
                         console.log('\tEnter a valid rating!');
                     } else {
-                        movie1.rating[1] += parseInt(replymovieRating);
-                        movie1.rating[0] += 1;
-                        //calculate rating
-                        movieList[1].rating[1] = Math.round((movieList[1].rating[1] / movieList[1].rating[0]) * 10) / 10;
+                        movie2.rating = replymovieRating;
                         break;
                     }
                 } while(replyRating == 2);
@@ -336,57 +278,26 @@ do {
                 } while(replyRating == 5);
             } else if(replyRating == 6) {
                 do {
-                    var replymovieRating = input.question('\n\tEnter your rating for "' + movieList[5].name + '" (1 to 5 inclusive): ');
+                    var replymovieRating = input.question('\n\tEnter your rating for "' + addedmovie.name + '" (1 to 5 inclusive): ');
                     console.log();
                     //check for valid input
                     var ismovieratingNumber = checkInput(replymovieRating);
-                    var voters5 = 0;
                     if(ismovieratingNumber == false) {
                         console.log('\tEnter a valid rating!');
                     } else {
-                        voters5 += 1;
-                        movieList[5].rating = replymovieRating + ' (' + voters5 + ' voters)';
+                        addedmovie.rating[1] = replymovieRating;
+                        addedmovie.rating[0] = '1';
                         break;
                     }
                 } while(replyRating == 6);
-            } else if(replyRating == 7) {
-                do {
-                    var replymovieRating = input.question('\n\tEnter your rating for "' + movieList[6].name + '" (1 to 5 inclusive): ');
-                    console.log();
-                    //check for valid input
-                    var ismovieratingNumber = checkInput(replymovieRating);
-                    var voters6 = 0;
-                    if(ismovieratingNumber == false) {
-                        console.log('\tEnter a valid rating!');
-                    } else {
-                        voters6 += 1;
-                        movieList[5].rating = replymovieRating + ' (' + voters6 + ' voters)';
-                        break;
-                    }
-                } while(replyRating == 7);
-            } else if(replyRating == 8) {
-                do{
-                    var replymovieRating = input.question('\n\tEnter your rating for "' + movieList[7].name + '" (1 to 5 inclusive): ');
-                    console.log();
-                    //check for valid input
-                    var ismovieratingNumber = checkInput(replymovieRating);
-                    var voters7 = 0;
-                    if(ismovieratingNumber == false) {
-                        console.log('\tEnter a valid rating!');
-                    } else {
-                        voters7 += 1;
-                        movieList[5].rating = replymovieRating + ' (' + voters7 + ' voters)';
-                        break;
-                    }
-                } while(replyRating == 6);
-            } else if(replyRating < 1 || replyRating > (movieList.length + 1)) {
+            } else if(reply < 1 || reply > 7) {
                 console.log('\n\tKindly enter a valid input!');
                 console.log();
-            } else if( isratingNumber == false) {
+            }  else if( isratingNumber == false) {
                 console.log('\n\tKindly enter a valid input!');
                 console.log();
             }
-        } while(replyRating == (movieList.length + 1));
+        } while(replyRating != 7);
     } else if(reply == 4) {
         //latest movies option
         //sort according to date
@@ -402,29 +313,69 @@ do {
         do {
             //sort to alphabetical order
             var sortgenre = genres.sort();
-            console.log('\n\tPlease select a genre:\n\t1) ' + sortgenre[0] + '\n\t2) ' + sortgenre[1] + '\n\t3) ' + sortgenre[2] + '\n\t4) ' + sortgenre[3] + '\n\t5) ' + sortgenre[4] + '\n\t6) ' + sortgenre[5] + '\n\t7) ' + sortgenre[6] + '\n\t8) ' + sortgenre[7] + '\n\t9) ' + sortgenre[8] + '\n\t10) exit');
-            var replyfilterGenre = input.question("\t>> ");
-            var p = 0;
+            console.log('\n\tPlease select a genre:\n\t1) ' + sortgenre[0] + '\n\t2) ' + sortgenre[1] + '\n\t3) ' + sortgenre[2] + '\n\t4) ' + sortgenre[3] + '\n\t5) ' + sortgenre[4] + '\n\t6) ' + sortgenre[5] + '\n\t7) ' + sortgenre[6] + '\n\t8) ' + sortgenre[7] + '\n\t9) ' + sortgenre[8]);
+            var replyfilterGenre = input.question("\n\t>> ");
             //check for valid input
             var isreplyfilterGenre = checkInput(replyfilterGenre);
             if(isreplyfilterGenre == false) {
                 console.log('\tPlease enter a valid genre input!');
                 console.log();
-            } else if(isreplyfilterGenre == true) {
-                //print out movies
-                var t = replyfilterGenre - 1;
-                console.log('\n\tYou have selected "' + genres[t] + '" genre:')
-                for(var m = 0; m < movieList.length; m++) {
-                    var check = movieList[m].genre.includes(genres[t]);
-                    if(check == true) {
-                        p += 1;
-                        console.log('\t' + p + ') ' + movieList[m].name);
-                    }
+            } else if(replyfilterGenre == 1) {
+                console.log('\n\tYou have selected "Action" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Fast X\n\t3) Ant-man and the Wasp: Quantumania\n');
+                var check1 = addedmovie.genre.includes('Action');
+                if(check1 == true) {
+                    console.log('\t4) ' + addedmovie.name);
                 }
-            } else if(replyfilterGenre == '10') {
-                //exit
-                break;
+            } else if(replyfilterGenre == 2) {
+                console.log('\n\tYou have selected "Adventure" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Avatar: The Way of Water\n\t3) Ant-man and the Wasp: Quantumania\n');
+                var check2 = addedmovie.genre.includes('Adventure');
+                if(check2 == true) {
+                    console.log('\t4) ' + addedmovie.name);
+                }
+            } else if(replyfilterGenre == 3) {
+                console.log('\n\tYou have selected "Crime" genre:\n\t1) Fast X\n');
+                var check3 = addedmovie.genre.includes('Crime');
+                if(check3 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
+            } else if(replyfilterGenre == 4) {
+                console.log('\n\tYou have selected "Drama" genre:\n\t1) Black Panther: Wakanda Forever 2022\n');
+                var check4 = addedmovie.genre.includes('Drama');
+                if(check4 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
+            } else if(replyfilterGenre == 5) {
+                console.log('\n\tYou have selected "Fantasy" genre:\n\t1) Black Panther: Wakanda Forever 2022\n');
+                var check5 = addedmovie.genre.includes('Fantasy');
+                if(check5 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
+            } else if(replyfilterGenre == 6) {
+                console.log('\n\tYou have selected "Horror" genre:\n\t1) M3GAN\n');
+                var check6 = addedmovie.genre.includes('Horror');
+                if(check6 == true) {
+                    console.log('\t2) ' + addedmovie.name);
+                }
+            } else if(replyfilterGenre == 7) {
+                console.log('\n\tYou have selected "Mystery" genre:\n\t1) Fast X\n\t2) M3GAN\n');
+                var check7 = addedmovie.genre.includes('Mystery');
+                if(check7 == true) {
+                    console.log('\t3) ' + addedmovie.name);
+                }
+            } else if(replyfilterGenre == 8) {
+                console.log('\n\tYou have selected "Sci-Fi" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Avatar: The Way of Water\n');
+                var check8 = addedmovie.genre.includes('Sci-Fi');
+                if(check8 == true) {
+                    console.log('\t3) ' + addedmovie.name);
+                }
+            } else if(replyfilterGenre == 9) {
+                console.log('\n\tYou have selected "Thriller" genre:\n\t1) Black Panther: Wakanda Forever 2022\n\t2) Fast X\n\t3) M3GAN\n');
+                var check9 = addedmovie.genre.includes('Thriller');
+                if(check9 == true) {
+                    console.log('\t4) ' + addedmovie.name);
+                }
             }
+            break;
         } while(reply == 5);
     } else if(reply == 6) {
         //rent movie option
