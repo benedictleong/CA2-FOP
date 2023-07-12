@@ -512,6 +512,7 @@ do {
             } else {
                 console.log('\x1b[32m******Login successful...******\x1b[37m\n');
                 var name = '\x1b[36m' + username + '\x1b[37m'; 
+                break;
             }
         } while(reply == 6);
     } else if(reply < 1 || reply > 9) {
