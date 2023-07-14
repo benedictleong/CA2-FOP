@@ -53,7 +53,7 @@ var genre9 = 'Thriller';
 var genres = [genre1,genre2,genre3,genre4,genre5,genre6,genre7,genre8,genre9];
 
 //default credits
-var creditsTotal = 50;
+var creditsTotal = 20;
 
 //movie release dates
 var dates = [];
@@ -319,75 +319,120 @@ do {
                     if(replyRental == '1') {
                         do {
                             var confirmRental1 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
-                            if(confirmRental1 == 'CONFIRM') {
-                                creditsTotal -= 20;
-                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
-                                break;
-                            } else if(confirmRental1 == 'EXIT') {
-                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
-                                console.log();
-                                break;
-                            } else {
+                            var isconfirmRental = checkInput(confirmRental1);
+                            if(isconfirmRental == false) {
+                                if(confirmRental1 == 'EXIT') {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                } else if(creditsTotal >= 20) {
+                                    if(confirmRental1 == 'CONFIRM') {
+                                        creditsTotal -= 20;
+                                        console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
+                                        break;
+                                    }
+                                } else if(creditsTotal < 20) {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED, INSUFFICIENT VALUE! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                }
+                            } else if(isconfirmRental == true) {
                                 console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
-                            }
+                            } 
                         } while(replyRental == '1');
                     } else if(replyRental == '2') {
                         do {
                             var confirmRental2 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
-                            if(confirmRental2 == 'CONFIRM') {
-                                creditsTotal -= 15;
-                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
-                                break;
-                            } else if(confirmRental2 == 'EXIT') {
-                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
-                                console.log();
-                                break;
-                            } else {
+                            var isconfirmRental = checkInput(confirmRental2);
+                            if(isconfirmRental == false) {
+                                if(creditsTotal < 15) {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED, INSUFFICIENT VALUE! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                } else if(creditsTotal >= 15) {
+                                    if(confirmRental2 == 'CONFIRM') {
+                                        creditsTotal -= 15;
+                                        console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
+                                        break;
+                                    }
+                                } else if(confirmRental2 == 'EXIT') {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                }
+                            } else if(isconfirmRental == true) {
                                 console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
                             }
                         } while(replyRental == '2');
                     } else if(replyRental == '3') {
                         do {
                             var confirmRental3 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
-                            if(confirmRental3 == 'CONFIRM') {
-                                creditsTotal -= 10;
-                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
-                                break;
-                            } else if(confirmRental3 == 'EXIT') {
-                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
-                                console.log();
-                                break;
-                            } else {
+                            var isconfirmRental = checkInput(confirmRental3);
+                            if(isconfirmRental == false) {
+                                if(creditsTotal < 10) {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED, INSUFFICIENT VALUE! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                } else if(creditsTotal >= 10) {
+                                    if(confirmRental3 == 'CONFIRM') {
+                                        creditsTotal -= 10;
+                                        console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
+                                        break;
+                                    }
+                                } else if(confirmRental3 == 'EXIT') {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                }
+                            } else if(isconfirmRental == true) {
                                 console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
                             }
                         } while(replyRental == '3');
                     } else if(replyRental == '4') {
                         do {
                             var confirmRental4 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
-                            if(confirmRental4 == 'CONFIRM') {
-                                creditsTotal -= 20;
-                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
-                                break;
-                            } else if(confirmRental4 == 'EXIT') {
-                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
-                                console.log();
-                                break;
-                            } else {
+                            var isconfirmRental = checkInput(confirmRental4);
+                            if(isconfirmRental == false) {
+                                if(creditsTotal < 20) {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED, INSUFFICIENT VALUE! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                } else if(creditsTotal >= 20) {
+                                    if(confirmRental4 == 'CONFIRM') {
+                                        creditsTotal -= 20;
+                                        console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
+                                        break;
+                                    }
+                                } else if(confirmRental4 == 'EXIT') {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                }
+                            } else if(isconfirmRental == true) {
                                 console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
                             }
                         } while(replyRental == '4');
                     } else if(replyRental == '5') {
                         do {
                             var confirmRental5 = input.question('\n\tCONFIRM PURCHASE? [type "CONFIRM" to continue/"EXIT" to leave]: ');
-                            if(confirmRental5 == 'CONFIRM') {
-                                creditsTotal -= 10;
-                                console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
-                                break;
-                            } else if(confirmRental5 == 'EXIT') {
-                                console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
-                                console.log();
-                                break;
-                            } else {
+                            var isconfirmRental = checkInput(confirmRental5);
+                            if(isconfirmRental == false) {
+                                if(creditsTotal < 10) {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED, INSUFFICIENT VALUE! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                } else if(creditsTotal >= 10) {
+                                    if(confirmRental5 == 'CONFIRM') {
+                                        creditsTotal -= 10;
+                                        console.log('\n\x1b[32m***PURCHASE SUCCESSFUL! You now have ' + creditsTotal + ' credits left. The movie will be sent to your registered email.***\x1b[37m\n');
+                                        break;
+                                    }
+                                } else if(confirmRental5 == 'EXIT') {
+                                    console.log('\n\x1b[33m***TRANSACTION DECLINED! Returning back to previous menu...***\x1b[37m');
+                                    console.log();
+                                    break;
+                                }
+                            } else if(isconfirmRental == true) {
                                 console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
                             }
                         } while(replyRental == '5');
@@ -398,6 +443,8 @@ do {
                     }
                 } else if(isreplyRental == false){
                     console.log('\x1b[33m******Please enter a valid input!!******\x1b[37m\n');
+                } else if(replyRental < 1 || replyRental > 6) {
+                    console.log('\n\x1b[33m******Invalid input!!******\x1b[37m');
                 }
             } while(username == 'admin');
         }
@@ -518,7 +565,7 @@ do {
     } else if(reply < 1 || reply > 9) {
         console.log('Please enter a valid input.');
         console.log();
-    } else if( isNumber == false) {
+    } else if(isNumber == false) {
         console.log('Please enter a valid input.');
         console.log();
     }
