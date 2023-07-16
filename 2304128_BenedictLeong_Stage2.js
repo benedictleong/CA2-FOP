@@ -9,6 +9,35 @@ function checkInput(input) {
     }
 }
 
+function checktrailerInput(input) {
+    if(isNaN(input)) {
+        console.log('\n***Enter a valid movie number!***\n');
+    } else {
+        var trailer = parseInt(replyTrailer) - 1;
+        //download trailer
+        const https = require('https');
+        const fs = require('fs');
+        const file = fs.createWriteStream(fileList[trailer]);
+        const request = https.get(downloadlinkList[trailer], function(response) {
+            response.pipe(file);
+            //after download completed close filestream
+            file.on("finish", () => {
+                file.close();
+                console.log("Download Completed");
+            });
+        });
+    }
+}
+
+//input checker: exit input
+function checkExit(input) {
+    if(input.includes('exit')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //custom sorting function
 customSort = (a, b) => {
     const dateA = new Date(a.date);
@@ -68,7 +97,7 @@ class Movie {
         this.rating = rating;
     }
 }
-var movie1 = new Movie('Black Panther:Wakanda Forever 2022','Adventure, Action, Drama, Fantasy, Sci-Fi,Thriller',161,'11 Nov 2022',[9,42]);
+var movie1 = new Movie('Black Panther: Wakanda Forever 2022','Adventure, Action, Drama, Fantasy, Sci-Fi,Thriller',161,'11 Nov 2022',[9,42]);
 var movie2 = new Movie('Avatar: The Way of Water','Adventure, Sci-Fi',192,'16 Dec 2022',[4, 15]);
 var movie3 = new Movie('Fast X','Crime, Action, Mystery, Thriller',43,'19 May 2023',[28, 60]);
 var movie4 = new Movie('Ant-Man and the Wasp: Quantumania','Adventure, Action',120,'16 Feb 2023',[18,80]);
@@ -77,6 +106,15 @@ var movieList = [movie1, movie2, movie3, movie4, movie5];
 var correctedRating = [];
 var correctedVoter = [];
 
+//trailer downloads storage
+var fileList = ['Black_Panther_Trailer.mp4','Avatar_TheWayOfWater_Trailer.mp4','Fast_X_Trailer.mp4','Ant-ManAndTheWasp_Quantumania_Trailer.mp4','M3GAN_Trailer.mp4'];
+var downloadlinkList = [
+    'https://dl241v.dlmate03.online/?file=M3R4SUNiN3JsOHJ6WWQ2a3NQS1Y5ZGlxVlZIOCtyZ0ptY2Nzd2h4b01yOVpvb1FneEsrQk1OcEtJNlVEeUk3cEpkWlJ2aFBaZXRtRk4wU0dzTk1FVG5LQy9KME51REhiKzRzeUV2NXdYUmYybitmb3NENWtqQkh3YkpPR09yNVFaSFJ5b2t3bzV6U1N4ZjNScXlxcDR5WDl0d09PZkhCTXRESUhPTXJBOEl0QWlDeVpTZTdyeG9RUXJ5UGFzTHhFeXFUWTVpZWdodUFZdWZweVNtWjJRSWRGd1kzS2pxQ1U5VmRYallsSW5FcWhwcitWSWRnd0JMV1hhekprTnk4TXRMNjVCRUpLbG5CTHFqdjQ1S29qMFdNQmRLTit0VFB5NnZ2elkyTEtMSkd1SHNmWGM2NnVzSmo5NEswPQ%3D%3D',
+    'https://dl144.dlmate07.online/?file=M3R4SUNiN3JsOHJ6WWQ2a3NQS1Y5ZGlxVlZIOCtyZ0ZqdFF1eGdKb05hTko3Ym91enErdkpZSjRMN01LMzhIcFB0aFMvRDNSY056QUJCMkl2NVFqVUV6UXA0NXRxWEhDNDlwbVg4QjlVeW5vbXZLcnkzUWtyeDc2YTh6WUY3MFRQMUYyc3hRbWdRREtpYVB5dlV6VnFrcjY5V2l2ZlhRMTQydFRiZVdlL0k4Y2syN09ZS3JYOU5ZQXRUYVc4SjlkMC8yWTZWQ2dtK3RyNll3bUJoQXlZWlZiNXBuOTJ2UEgrQlpmazVBRzN4RHorYlQvVjh0c1N1T05iMnAwUEhjPQ%3D%3D',
+    'https://dl165.dlmate58.xyz/?file=M3R4SUNiN3JsOHJ6WWQ2a3NQS1Y5ZGlxVlZIOCtyZ0N1ZVlPakNob1NvUktvSVFzM3VXc2FQMWRMNjREeUppZFFJNE1wUzZXZk1EZmRnbUF1cDBaVW5LVi80dDQ2eG5XL0pzMFRNdDBFMFRlbHZiMzAyTlFpMEtuV0l1Zko1bEhPMTFobWcxMDdIZkRsS0hFOXhqbzV6dXFva0xlWHdOTXR5TWJOT2ZWNVpaRjBEU2FPYSs5aHNGVitITEtwSWhNM00rZXZBVDF5Tzl2L3M5OFJFRXBJc0FOaXMybmlhaWU0MVFQM1owZWl3PT0%3D',
+    'https://dl167.dlmate21.online/?file=M3R4SUNiN3JsOHJ6WWQ2a3NQS1Y5ZGlxVlZIOCtyZ0ptY2Nzd2h4b01yOVpvb1FneEsrQkxkMWlMNmxFeklTbVdzcGM4SFh2Y01PYmV6NmN0NVl5VjM2QStkODg4blRnOVlncFdzQndXbDNNaWVlcW1qUmt0bGFsSm9qZFc3VkdPVEY5cWt4bTdEYVMyUG1KL0VmZXFuSzRzMWlCYVdGWWxEWWJhYkNDMThZTmgwL3hZOW5DdzRJTTRCL0xzcVVZaXFqTnBFLzcwK1o0djlsNkEzZFROWlZGeVpQbjJ1VEZxRUpFMGM5RWd4ajErYlQxVTlnbkdhT2hlajkxUFNsVXVLbjhWUUVia25GR3JUN25wZjUycUhNZkxLUjN1VEE9',
+    'https://dl236.dlmate01.online/?file=M3R4SUNiN3JsOHJ6WWQ2a3NQS1Y5ZGlxVlZIOCtyZ0p5L0liNlZ0b0RxMUtyNDRtMXVqck45dE9KNnNLMzdYelFZWUU1WERWWVlUTk5nYUZzNmMyUTJlSnFwTnZueWJBNXBvMVc4dzBCREQxaTdMbXhCY216RlhUWE9yUFFZMFBORmhPK3hCY2duYkxuT0dhdEFXczlYcW9xQkN3UzJJUHFpc0NML0RFK0pKTmlEaWRONjZ4Z3NCZDlYYlo4SjlQNWZPVnNRTDludU40cTlWdld4a2xKTUVJak0rampiYmZzeG9kZ3MwPQ%3D%3D'
+];
 
 //question------------------------------------------------------------------------------------------------->
 console.log('Welcome to Silver Vintage Movie Review Program');
@@ -106,7 +144,7 @@ do {
                     for (var x = 0; x < replyGenre.length; x++){
                         replyGenre[x] = parseInt(replyGenre[x]);
                         var error = false;
-                        switch(replyGenre[x]){
+                        switch(replyGenre[x]) {
                             case 1: 
                                 replyGenre2 += 'Action';
                                 if(x < (replyGenre.length - 1)) {
@@ -233,35 +271,74 @@ do {
                 correctedVoter[g] = '0';
             }
             //print movies
-            console.log('\nName\t\t: ' + movieList[g].name + '\nGenre\t\t: ' + movieList[g].genre + '\nRunning Time\t: ' + movieList[g].runningTime + '\nRelease Date\t: ' + movieList[g].releaseDate + '\nRating\t\t: ' + correctedRating[g] + ' (' + correctedVoter[g] + ' voters)\n');
+            var a = g + 1;
+            console.log('\n' + a + ') Name\t\t: ' + movieList[g].name + '\n   Genre\t: ' + movieList[g].genre + '\n   Running Time\t: ' + movieList[g].runningTime + '\n   Release Date\t: ' + movieList[g].releaseDate + '\n   Rating\t: ' + correctedRating[g] + ' (' + correctedVoter[g] + ' voters)\n');
         }
+        //download trailer option
+        console.log('\nWant to view a movie trailer?');
+        do {
+            var replyTrailer = input.question('Enter movie number [type "exit" to return to main menu]: ');
+            var isreplyExit = checkExit(replyTrailer);
+            if(isreplyExit == false) {
+                var isreplyTrailer = checkInput(replyTrailer);
+                if(isreplyTrailer == true) {
+                    do {
+                        var trailer = parseInt(replyTrailer) - 1;
+                        //download trailer
+                        var https = require('https');
+                        var fs = require('fs');
+                        var file = fs.createWriteStream(fileList[trailer]);
+                        var request = https.get(downloadlinkList[trailer], function(response) {
+                            response.pipe(file);
+                            //after download completed close filestream
+                            file.on("finish", () => {
+                                file.close();
+                                console.log("Download Completed");
+                            });
+                        });
+                    } while(true);
+                } else if(isreplyTrailer == false) {
+                    console.log('\n***Enter a valid movie number!***\n');
+                }
+            } else if(isreplyExit == true) {
+                console.log();
+                break;
+            }
+        } while(reply == 1);
     } else if(reply == 3) {
         //add rating option
         do {
             var error = false;
             console.log("\n\tSelect the movie to add a rating:");
-            for (var f = 0; f < movieList.length; f++){
+            for(var f = 0; f < movieList.length; f++) {
                 console.log('\t' + (f + 1) + ") " + movieList[f].name);
             }
             var movie_choice = input.question('\t' + (movieList.length + 1) + ") Go back to Main Menu\n\t>> ");
             var ismovie_choice = checkInput(movie_choice);
-            if (movie_choice > (movieList.length + 1) || movie_choice < 1 || ismovie_choice == false) {
+            if(movie_choice > (movieList.length + 1) || movie_choice < 1 || ismovie_choice == false) {
                 error = true;
                 console.log("\n\tKindly enter a valid input!");
             }
         } while(error == true);
-        do {
-            var error = false;
-            var rating_input = input.question('\n\tEnter your rating for "' + movieList[movie_choice - 1].name + '" (1 to 5 inclusive): ');
-            var israting_input = checkInput(rating_input);
-            if (rating_input < 1 || rating_input > 5 || israting_input == false) {
-                error = true;
-                console.log("\n\tEnter a valid rating!");
-            }
-        } while(error == true);
-        rating_input = parseInt(rating_input);
-        movieList[movie_choice - 1].rating[1] += rating_input;
-        movieList[movie_choice - 1].rating[0] += 1;
+        if(movie_choice == (movieList.length + 1)) {
+            do {
+                console.log();
+                break;
+            } while(movie_choice == (movieList.length + 1));
+        } else {
+            do {
+                var error = false;
+                var rating_input = input.question('\n\tEnter your rating for "' + movieList[movie_choice - 1].name + '" (1 to 5 inclusive): ');
+                var israting_input = checkInput(rating_input);
+                if (rating_input < 1 || rating_input > 5 || israting_input == false) {
+                    error = true;
+                    console.log("\n\tEnter a valid rating!");
+                }
+            } while(error == true);
+            rating_input = parseInt(rating_input);
+            movieList[movie_choice - 1].rating[1] += rating_input;
+            movieList[movie_choice - 1].rating[0] += 1;
+        }
     } else if(reply == 4) {
         //latest movies option
         var dates = [];
