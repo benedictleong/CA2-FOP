@@ -1,17 +1,16 @@
-const data = 'name, email, twitter';
+const open = require('open');
 
-const blob = new Blob ([data], { type: "octet-stream" });
+(async () => {
+    // Opens the image in the default image viewer and waits for the opened app to quit.
+    await open('blackpanther.mp4', {wait: true});
+    console.log('The image viewer app quit');
 
-const href = URL.createObjectURL(blob);
+    // Opens the URL in the default browser.
+    await open('https://drive.google.com/uc?export=download&id=15-thzsWepbTbZ7RucBQwRMItXslbBScQ');
 
-const a = Object.assign(document.createElement("a"), {
-    href,
-    style: "display: none",
-    download: "myData.csv",
-});
-document.body.appendChild(a)
+    // Opens the URL in a specified browser.
+    await open('https://drive.google.com/uc?export=download&id=15-thzsWepbTbZ7RucBQwRMItXslbBScQ', {app: 'google chrome'});
 
-a.click();
-
-URL.revokeObjectURL(href);
-a.remove();
+    // Specify app arguments.
+    await open('https://drive.google.com/uc?export=download&id=15-thzsWepbTbZ7RucBQwRMItXslbBScQ', {app: ['google chrome', '--incognito']});
+})();
